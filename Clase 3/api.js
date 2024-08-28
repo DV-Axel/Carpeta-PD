@@ -1,16 +1,17 @@
-const express = require("express")
-const api=express();
-const router = express.Router()
+const express = require("express") //traigo el modulo de express
+const api=express(); //instancio express
+
+const {router} = require("./src/Router/raiz")
+
 const path=require("path") //uso path para manejar mejor las rutas
 const host = "localhost"
 const port = 3999
 
-api.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname,("./public/asd.html"))) //la carpeta raiz seria api.js; sendFile para mostrar una pagina
-})
+api.use("/",router)
+
 
 
 api.listen(port, host, () => {
     console.log("ok cambio")
-    console.log(`${host}:${port}`)
+    console.log(`http://${host}:${port}`) //truco para cargar a la url por consola
 })
